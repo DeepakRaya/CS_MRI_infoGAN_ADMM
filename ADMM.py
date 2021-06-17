@@ -44,6 +44,7 @@ class PnPADMM(object):
         '''
         Use the plug-and-play ADMM algorithm for compressive sensing recovery
         '''
+        #P = np.linalg.inv(A.T.dot(A) + self.algo_param["rho"]*np.eye(self.shape[1]))
         P = np.linalg.inv(A.T.dot(A) + self.algo_param["rho"]*np.eye(self.shape[1]))
         
         # Initial start
@@ -56,12 +57,17 @@ class PnPADMM(object):
         z_f = x_f
         u_f = np.zeros_like(x_f,dtype = np.complex128)
         
+#         x = self.algo_param["x0"]
+#         z = np.zeros_like(x)
+#         u = np.zeros_like(x)
+        
         k = 0
         tol = self.algo_param["tol"]
         loss_record = np.array([])
         z_record = []
         x_record = []
         callback_res = []
+        
         # Start iterations
         while k < self.algo_param["maxiter"]:
             # least square step

@@ -13,12 +13,12 @@ import pickle
 import gc
 
 
-save_path='/home/deepak/Desktop/CS_MRI_codes_simulation/MRI_data_MCCAI/training_gt_split'
+save_path='/home/deepak/Desktop/CS_MRI_codes_simulation/MRI_data_MCCAI/training_gt_split_1'
 
 def load_a(path, num):
         f = os.listdir(path)
         #use imgs with more than 10% non-zero values
-        n_zero_ratio = 0.1
+        #n_zero_ratio = 0.1
         #num is to reduce the number of files loaded
         for i in range(100):
             data = []
@@ -28,8 +28,8 @@ def load_a(path, num):
             vol_max = np.max(img_data)
             img_data = img_data/vol_max*2
             print(img_data.shape[2])
-            for j in range(img_data.shape[2]): 
-                if (float(np. count_nonzero(img_data[:,:,j]))/np.prod(img_data[:,:,j].shape))>=n_zero_ratio:
+            for j in range(20,img_data.shape[2]-5): 
+                #if (float(np. count_nonzero(img_data[:,:,j]))/np.prod(img_data[:,:,j].shape))>=n_zero_ratio:
                     img_data[:,:,j] = img_data[:,:,j]-1  
                     img_data_ts = np.rot90(img_data[:,:,j])
                     data.append(img_data_ts)
